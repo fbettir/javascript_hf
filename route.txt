@@ -1,0 +1,30 @@
+Teknősök szigeteken
+
+    login form?
+
+ROUTING:
+
+GET /                                                 - index.html
+POST /login                                           - jelszó ellenőrzés, ha ok, map
+
+GET /island                                           - map.html          //TODO: létrehozni a logint, szétszedni
+GET /island/del/:islandid
+GET /island/round
+
+GET /island/new                                       - new_island.html
+POST /island/new
+
+GET /island/edit/:islandid                            - island_modify.html
+POST /island/edit/:islandid
+
+GET /turtle/:islandid                                 - island.html
+GET /turtle/:islandid/:turtleid/del
+
+GET /turtle/take_care/:islandid/:turtleid             - take_care_of_turtle.html
+POST /turtle/take_care/:islandid/:turtleid
+
+GET /turtle/modify/:islandid/:turtleid                - turtle_modify.html
+POST /turtle/modify/:islandid/:turtleid
+
+GET /turtle/new/:islandid                             - new_turtle.html
+POST /turtle//new/:islandid
