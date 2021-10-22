@@ -4,30 +4,21 @@ Teknősök szigeteken
 
 ROUTING:
 
-GET /?hiba=wrongpass
-    handleWrongPassMW                                 - get paramétert néz, template változó lerak
-    renderMW(index.html)                              - kirendereli az oldalt
-
-POST /login                                           - jelszó ellenőrzés, ha ok, map redirect
-    checkPassMW                                       - post param (ha beérkezik) ha azonos valamival --> sessionnel belogin tovább (map.html), ha nem akkor vissza (index.html)
-
 --------------------------------------------  I S L A N D - M A P ------------------------------------------------------
 
 
-GET /island                                                     //TODO: létrehozni a logint, szétszedni
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
+GET /island
     getMapMW                                          - DB ből lekérdezi a szigeteket, templatebe rakja
     stepRoundMW                                       - Ha lépteti a számlálót,
         getTurtlesMW                                              minden teknőst
             saveTurtleMW                                              elment inkrementált életkorral
-    renderMW(map.html)                                - kirendereli az oldalt
+    renderMW(index.html)                                - kirendereli az oldalt
 
 
 -------------------------------------------- D E L E T E - I S L A N D -------------------------------------------------
 
 
 GET /island/del/:islandid
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getIslandMW                                       - same as below / ld. 63.? sor
     delIslandMW                                       - törli a kikeresett szigetet
         res.locals.island.delete();
@@ -39,7 +30,6 @@ GET /island/del/:islandid
 
 
 GET, POST /island/new
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     saveIslandMW                                      - új sziget
                                                       - ha nincs post paraméterben küldve az adat, akkor next(),
                                                         ha van leküldött adat megpróbálja elmenteni,
@@ -62,7 +52,6 @@ GET, POST /island/new
  -------------------------------------------- E D I T I S L A N D ------------------------------------------------------
 
 GET /island/edit/:islandid
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getIslandMW                                       - hogy a formot alapból ki tudjuk tölteni
                                                       - paraméterből kiveszi az ID-t, beküldi adatbázisba,
                                                         visszajövő adatot res.locals-ba, amit a templating értelmez
@@ -86,7 +75,6 @@ GET /island/edit/:islandid
 
 
 GET /turtle/:islandid
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getIslandMW                                       - same as above / ld. 63.? sor
     getTurtlesMW                                      - lekéri a szigeten lévő teknősöket
     renderMW(island.html)                             - kirendereli az oldalt
@@ -98,7 +86,6 @@ GET /turtle/:islandid
 
 
 GET /turtle/:islandid/:turtleid/del
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getTurtleMW                                       - kikeresi id alapján a teknőst
     delTurtleMW                                       - kitörli a teknőst
 
@@ -106,21 +93,17 @@ GET /turtle/:islandid/:turtleid/del
 -------------------------------------------- T U R T L E S - T A K E C A R E--------------------------------------------
 
 GET, POST /turtle/take_care/:islandid/:turtleid
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getIslandMW                                       - same as above / ld. 63.? sor
     getTurtleMW                                       - kikeresi id alapján a teknőst
-    takecareTurtleMW                                  - ha be van jelölve valami akkor gondozva===true
+    takeCareOfTurtleMW                                - ha be van jelölve valami akkor gondozva===true
     renderMW(take_care_of_turtle.html)                - kirendereli az oldalt
 
-POST /turtle/take_care/:islandid/:turtleid
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
-
+                           -
 
 
  -------------------------------------------- T U R T L E S - M O D I F Y ----------------------------------------------
 
 GET, POST /turtle/modify/:islandid/:turtleid                -
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     getIslandMW                                       - kikeresi id alapján a szigetet
     getTurtleMW                                       - kikeresi id alapján a teknőst
     saveTurtleMW                                      - módosítja a teknőst ld:
@@ -132,7 +115,6 @@ GET, POST /turtle/modify/:islandid/:turtleid                -
 
 
 GET, POST /turtle/new/:islandid                             - new_turtle.html
-    authMW                                            - ellenőrzi, hogy a user be van e jelentkezve, ha igen next(), ha nem, átirányít /?hiba=lepjbelegyszi
     saveTurtleMW                                      - módosítja a teknőst ld:
     renderMW(map.html)                                - kirendereli az oldalt
 

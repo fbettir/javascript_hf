@@ -1,0 +1,3 @@
+/**
+ * deletes island
+ */

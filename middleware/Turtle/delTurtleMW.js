@@ -1,0 +1,3 @@
+/**
+ * Deletes turtle by ID
+ */
