@@ -6,7 +6,7 @@ var app = express();
 
 
 //load routing
-require('./route./index')(app);
+require('./route/index')(app);
 
 app.use(express.static('static'));  //middleware
 
